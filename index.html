@@ -1,5 +1,7 @@
 <script>
     let windowControl = require("./modules/windowManager.js")
+    let curse = require("./modules/getCurse.js")
+    let cheerio = require("cheerio")
 </script>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,6 +19,7 @@
             <strong><span>ADDON</span>MANAGER</strong>
             <nav>
                 <ul>
+                    <li><img src="./assets/btn-settings.svg" id="settings" onclick="alert('settings not added yet lmao')"></li>
                     <li><img src="./assets/btn-min.svg" id="min" onclick="windowControl.minimize()"></li>
                     <li><img src="./assets/btn-close.svg" onclick="windowControl.close()"></li>
                 </ul>
@@ -26,7 +29,10 @@
         <input type="text" id="search" placeholder="Addon name...">
 
         <main>
-            <div id="addonList">
+            <div class="addonContainer">
+                <ul id="addonUL" class="addonList">
+
+                </ul>
             </div>
         </main>
     </div>
@@ -36,9 +42,25 @@
 
 <script>
     var input = document.getElementById("search")
+    var addonList = document.getElementById("addonUL")
 
     input.addEventListener("keyup", (event) => {
+        results = []
+
         if (event.keyCode === 13) {
+            while(addonList.firstChild){
+                addonList.removeChild(addonList.firstChild)
+            }
+
+            results = curse.search(input.value)
+
+            setTimeout(() => {
+                results.forEach(result => {
+                    var li = document.createElement("li")
+                    li.appendChild(document.createTextNode(result.title))
+                    addonList.appendChild(li)
+                });
+            }, 1000)
         }
     })
 </script>

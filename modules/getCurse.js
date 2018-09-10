@@ -1,19 +1,26 @@
 var Crawler = require("crawler")
 const cheerio = require("cheerio")
+results = []
 
 function getAddonInfo(elem) {
-    var addonInfo = {}
+    var addonInfo = {
+        title: "",
+        desc: ""
+    }
     const $ = cheerio.load(elem)
-    console.log($(elem).children()[0].attribs.class)
+    divChildren = $(elem).children()
 
-    $(elem).each((index, part) => {
-        // console.log(part)
-        var currentClass = part.attribs.class
-        // console.log(currentClass)
-        if(currentClass === "list-item_details xs-mg-r-1") {
-            // console.log(currentClass)
+    $(divChildren).each((index, child) =>{
+        objClass = child.attribs.class
+        if(objClass === "list-item__details xs-mg-r-1"){
+            a = $(child).children()[0]
+            title = ($(a).text())
+            formattedTitle = title.replace(/\s+/g, " ").trim()
+            addonInfo.title = formattedTitle 
         }
     })
+
+    return addonInfo
 }
 
 var c = new Crawler({
@@ -23,22 +30,29 @@ var c = new Crawler({
             console.log(error);
         } else {
             var $ = result.$;
-            console.log($("title").text());
             $("li").each((index, li) => {
                 var liClass = li.attribs.class
                 if (liClass === "project-list-item") {
                     var addonDiv = $(li).children()[0]
-                    getAddonInfo($(addonDiv).children()[0]);
+                    info = getAddonInfo($(addonDiv));
+                    results.push(info)
                 }
             })
         }
     }
 })
 
-var addon = {
-    name: "deadly+boss+mods"
+module.exports = {
+    search: function(searchTerm) {
+        results = []
+        var addon = {
+            name: searchTerm
+        }
+
+        const baseUrl =  `https://www.curseforge.com/wow/addons/search?search=${addon.name}`
+
+        c.queue(baseUrl)
+
+        return results
+    }
 }
-
-const baseUrl =  `https://www.curseforge.com/wow/addons/search?search=${addon.name}`
-
-c.queue(baseUrl)

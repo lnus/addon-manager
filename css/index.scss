@@ -62,4 +62,16 @@ body {
         font-family: $font-stack;
         outline: none;
     }
+
+    .addonList {
+        margin: 0;
+        padding: 0;
+
+        li {
+            list-style-type: none;
+            padding: 20px;
+            margin: 0;
+            background-color: #cecece;
+        }
+    }
 }

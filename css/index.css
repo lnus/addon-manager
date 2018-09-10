@@ -65,4 +65,16 @@ body {
   font-family: "Source Sans Pro", sans-serif;
   outline: none;
 }
+
+.container .addonList {
+  margin: 0;
+  padding: 0;
+}
+
+.container .addonList li {
+  list-style-type: none;
+  padding: 20px;
+  margin: 0;
+  background-color: #cecece;
+}
 /*# sourceMappingURL=index.css.map */
