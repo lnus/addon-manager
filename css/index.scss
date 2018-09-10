@@ -1,0 +1,65 @@
+$font-stack: "Source Sans Pro", sans-serif;
+
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,200i,300,300i,400,400i,600,600i,700,700i,900,900i');
+
+body {
+    padding: 0;
+    margin: 0;
+
+    height: 100%;
+    background-color: #EBEBEB;
+    font-family: $font-stack;
+}
+.container {
+    display: grid;
+    grid-template-rows: 34px auto auto;
+
+    header {
+        display: grid;
+        grid-template-columns: 85% auto;
+        padding: 8px;
+        background-color: #3a3a3a;
+
+        strong {
+            -webkit-app-region: drag;
+            color: #FFF;
+            
+            span {
+                color: skyblue;
+            }
+        }
+
+        nav {
+            justify-self: right;
+
+            ul {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+
+                li {
+                    float: left;
+                    margin-left: 8px;
+
+                    img {
+                        width: 12px;
+                        cursor: pointer;
+                    }
+
+                    img#min {
+                        padding: 10px;
+                    }
+                }
+            }
+        }
+    }
+
+    input {
+        background-color: #DBDBDB;
+        border: 0;
+        padding: 12px;
+        color: gray;
+        font-family: $font-stack;
+        outline: none;
+    }
+}

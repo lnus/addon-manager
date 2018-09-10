@@ -1,0 +1,27 @@
+{
+  "name": "addonmanager",
+  "version": "0.0.1",
+  "description": "A simple addon manager for World of Warcraft",
+  "main": "index.js",
+  "scripts": {
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "author": "Linus Wähler",
+  "license": "MIT",
+  "devDependencies": {
+    "cheerio": "^1.0.0-rc.2",
+    "electron": "^2.0.8",
+    "electron-builder": "^20.28.4"
+  },
+  "build": {
+    "appId": "lnus.addonmanager",
+    "mac": {
+      "category": "addonmanager.lmao"
+    }
+  },
+  "dependencies": {
+    "crawler": "^1.2.0"
+  }
+}

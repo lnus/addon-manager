@@ -1,0 +1,44 @@
+<script>
+    let windowControl = require("./modules/windowManager.js")
+</script>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>AddonManager</title>
+    <link rel="stylesheet" href="./css/index.css">
+</head>
+
+<body>
+    <div class="container">
+
+        <header>
+            <strong><span>ADDON</span>MANAGER</strong>
+            <nav>
+                <ul>
+                    <li><img src="./assets/btn-min.svg" id="min" onclick="windowControl.minimize()"></li>
+                    <li><img src="./assets/btn-close.svg" onclick="windowControl.close()"></li>
+                </ul>
+            </nav>
+        </header>
+
+        <input type="text" id="search" placeholder="Addon name...">
+
+        <main>
+            <div id="addonList">
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>
+
+<script>
+    var input = document.getElementById("search")
+
+    input.addEventListener("keyup", (event) => {
+        if (event.keyCode === 13) {
+        }
+    })
+</script>
