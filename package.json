@@ -22,6 +22,7 @@
     }
   },
   "dependencies": {
-    "crawler": "^1.2.0"
+    "crawler": "^1.2.0",
+    "dep": "^0.18.1"
   }
 }

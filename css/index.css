@@ -8,17 +8,15 @@ body {
 }
 
 .container {
-  display: -ms-grid;
+  height: 100%;
+  overflow: hidden;
   display: grid;
-  -ms-grid-rows: 34px auto auto;
-      grid-template-rows: 34px auto auto;
+  grid-template-rows: 34px 42px auto;
 }
 
 .container header {
-  display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 85% auto;
-      grid-template-columns: 85% auto;
+  grid-template-columns: 85% auto;
   padding: 8px;
   background-color: #3a3a3a;
 }
@@ -33,8 +31,7 @@ body {
 }
 
 .container header nav {
-  -ms-grid-column-align: right;
-      justify-self: right;
+  justify-self: right;
 }
 
 .container header nav ul {
@@ -69,6 +66,8 @@ body {
 .container .addonList {
   margin: 0;
   padding: 0;
+  height: 340px;
+  overflow: auto;
 }
 
 .container .addonList li {

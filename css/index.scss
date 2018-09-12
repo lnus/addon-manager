@@ -10,9 +10,12 @@ body {
     background-color: #EBEBEB;
     font-family: $font-stack;
 }
+
 .container {
+    height: 100%;
+    overflow: hidden;
     display: grid;
-    grid-template-rows: 34px auto auto;
+    grid-template-rows: 34px 42px auto;
 
     header {
         display: grid;
@@ -66,6 +69,10 @@ body {
     .addonList {
         margin: 0;
         padding: 0;
+
+        height: 340px;
+
+        overflow: auto;
 
         li {
             list-style-type: none;
