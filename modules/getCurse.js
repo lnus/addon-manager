@@ -2,6 +2,13 @@ var Crawler = require("crawler")
 const cheerio = require("cheerio")
 results = []
 
+function getDownloadLink(elem) {
+    //TODO: FIX THIS SHIT
+    // /projects/{addon.name}/files/latest
+    // https://wow.curseforge.com/projects/{addon.name}/files/latest
+
+}
+
 function getAddonInfo(elem) {
     var addonInfo = {
         title: "",
