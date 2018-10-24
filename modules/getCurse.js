@@ -2,18 +2,19 @@ var Crawler = require("crawler")
 const cheerio = require("cheerio")
 results = []
 
-function getDownloadLink(elem) {
-    //TODO: FIX THIS SHIT
-    // /projects/{addon.name}/files/latest
-    // https://wow.curseforge.com/projects/{addon.name}/files/latest
+function getDownloadLink(addonHref) {
+    var downloadLink = `https://wow.curseforge.com/projects/${addonHref}/files/latest`
 
+    return downloadLink
 }
 
 function getAddonInfo(elem) {
     var addonInfo = {
         title: "",
-        desc: ""
+        desc: "",
+        href: ""
     }
+
     const $ = cheerio.load(elem)
     divChildren = $(elem).children()
 
@@ -21,11 +22,17 @@ function getAddonInfo(elem) {
         objClass = child.attribs.class
         if(objClass === "list-item__details xs-mg-r-1"){
             a = $(child).children()[0]
+            formattedHref = (a.attribs.href).replace("/wow/addons/", "")
+            addonInfo.href = formattedHref 
             title = ($(a).text())
             formattedTitle = title.replace(/\s+/g, " ").trim()
             addonInfo.title = formattedTitle 
+            addonLink = getDownloadLink(addonInfo.href)
+            console.log(addonLink)
         }
     })
+
+    console.log(addonInfo)
 
     return addonInfo
 }
