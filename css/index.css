@@ -10,13 +10,17 @@ body {
 .container {
   height: 100%;
   overflow: hidden;
+  display: -ms-grid;
   display: grid;
-  grid-template-rows: 34px 42px auto;
+  -ms-grid-rows: 34px 42px auto;
+      grid-template-rows: 34px 42px auto;
 }
 
 .container header {
+  display: -ms-grid;
   display: grid;
-  grid-template-columns: 85% auto;
+  -ms-grid-columns: 85% auto;
+      grid-template-columns: 85% auto;
   padding: 8px;
   background-color: #3a3a3a;
 }
@@ -31,7 +35,8 @@ body {
 }
 
 .container header nav {
-  justify-self: right;
+  -ms-grid-column-align: right;
+      justify-self: right;
 }
 
 .container header nav ul {
@@ -63,10 +68,22 @@ body {
   outline: none;
 }
 
+.container input:focus {
+  outline: none;
+}
+
+.container input:-moz-read-only {
+  background-color: #1c1c1c;
+}
+
+.container input:read-only {
+  background-color: #1c1c1c;
+}
+
 .container .addonList {
   margin: 0;
   padding: 0;
-  height: 340px;
+  height: 100%;
   overflow: auto;
 }
 
@@ -75,5 +92,32 @@ body {
   padding: 20px;
   margin: 0;
   background-color: #cecece;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.container .addonList li button {
+  float: right;
+  border: none;
+  display: inline-block;
+  border-radius: 20px;
+  border: 2px solid white;
+  color: white;
+  padding: 10px;
+  background: none;
+  margin: 0;
+  -webkit-transition: all .5s ease-in-out;
+  transition: all .5s ease-in-out;
+  cursor: pointer;
+}
+
+.container .addonList li button:hover {
+  background-color: white;
+  color: black;
+}
+
+.container .addonList li button:focus {
+  outline: none;
 }
 /*# sourceMappingURL=index.css.map */

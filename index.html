@@ -2,6 +2,8 @@
     let windowControl = require("./modules/windowManager.js")
     let curse = require("./modules/getCurse.js")
     let cheerio = require("cheerio")
+    let appSettings = require("./modules/settings.js")
+
 </script>
 
 <!DOCTYPE html>
@@ -20,14 +22,15 @@
             <strong><span>ADDON</span>MANAGER</strong>
             <nav>
                 <ul>
-                    <li><img src="./assets/btn-settings.svg" id="settings" onclick="alert('settings not added yet lmao')"></li>
+                    <li><img src="./assets/btn-settings.svg" id="lock" onclick="lockPath()"></li>
                     <li><img src="./assets/btn-min.svg" id="min" onclick="windowControl.minimize()"></li>
                     <li><img src="./assets/btn-close.svg" onclick="windowControl.close()"></li>
                 </ul>
             </nav>
         </header>
 
-        <input type="text" id="search" placeholder="Addon name...">
+        <input type="text" id="wow-directory" placeholder="WoW directory...">
+        <input type="text" id="search" placeholder="Addon search...">
 
         <main>
             <div class="addonContainer">
@@ -57,11 +60,36 @@
 
             setTimeout(() => {
                 results.forEach(result => {
+                    // Creates a button to download the selected item
+                    var downloadButton = document.createElement("button")
+                    downloadButton.innerHTML = "Download" 
+                    downloadButton.addEventListener("click", function() {
+                        //TODO: Make the button click actually do something
+                        console.log(result.href);
+                    });
+
+                    // Creates the list item
                     var li = document.createElement("li")
+
+                    // Adds the download button and a title to the list item
                     li.appendChild(document.createTextNode(result.title))
+                    li.appendChild(downloadButton)
+
+                    // Adds the list item to the list of Addons
                     addonList.appendChild(li)
                 });
             }, 1200)
         }
     })
+
+    function lockPath() {
+        wowPath = document.getElementById("wow-directory");
+        if (wowPath.readOnly) {
+            wowPath.readOnly = false;
+        } else {
+            wowPath.readOnly = true;
+        }
+
+    }
+
 </script>
