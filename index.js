@@ -1,4 +1,5 @@
-const {app, BrowserWindow} = require("electron")
+const {app, BrowserWindow, ipcMain} = require("electron");
+const {download} = require("electron-dl");
 
 let win
 
@@ -31,3 +32,17 @@ app.on("activate", () => {
         createWindow()
     }
 })
+
+function downloadFile(args) {
+    download(BrowserWindow.getFocusedWindow(), args.url, {
+        saveAs: false,
+        directory: args.savePath
+    })
+        .then(dl => console.log(dl.getSavePath()))
+        .catch(console.error);
+    console.log(args)
+}
+
+ipcMain.on('download-action', (event, args) => {
+    downloadFile(args);
+});

@@ -12,7 +12,8 @@ function getAddonInfo(elem) {
     var addonInfo = {
         title: "",
         desc: "",
-        href: ""
+        href: "",
+        dlink: ""
     }
 
     const $ = cheerio.load(elem)
@@ -29,6 +30,7 @@ function getAddonInfo(elem) {
             addonInfo.title = formattedTitle 
             addonLink = getDownloadLink(addonInfo.href)
             console.log(addonLink)
+            addonInfo.dlink = addonLink
         }
     })
 
