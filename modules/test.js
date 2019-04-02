@@ -1,7 +1,7 @@
 // Formatting of exports :)
 
 module.exports = {
-    alertMe: function() {
-        alert("me")
-    }
+  alertMe: function() {
+    alert("me")
+  }
 }

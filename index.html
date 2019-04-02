@@ -1,126 +1,128 @@
 <script>
-    let windowControl = require("./modules/windowManager.js")
-    let curse = require("./modules/getCurse.js")
-    let cheerio = require("cheerio")
-    let downloadManager = require("./modules/downloadManager.js")
-    let Store = require('electron-store');
 </script>
 
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
+  <head>
     <meta charset="UTF-8">
     <title>AddonManager</title>
     <link rel="stylesheet" href="./css/index.css">
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="container">
 
-        <header>
-            <strong><span>ADDON</span>MANAGER</strong>
-            <nav>
-                <ul>
-                    <li><img src="./assets/padlock.svg" id="lock" onclick="lockPath()"></li>
-                    <li><img src="./assets/btn-min.svg" id="min" onclick="windowControl.minimize()"></li>
-                    <li><img src="./assets/btn-close.svg" onclick="windowControl.close()"></li>
-                </ul>
-            </nav>
-        </header>
+      <header>
+        <strong><span>ADDON</span>MANAGER</strong>
+        <nav>
+          <ul>
+            <li><img src="./assets/padlock.svg" id="lock" onclick="lockPath()"></li>
+            <li><img src="./assets/btn-min.svg" id="min" onclick="windowControl.minimize()"></li>
+            <li><img src="./assets/btn-close.svg" onclick="windowControl.close()"></li>
+          </ul>
+        </nav>
+      </header>
 
-        <input type="text" id="wow-directory" placeholder="WoW directory...">
-        <input type="text" id="search" placeholder="Addon search...">
+      <input type="text" id="wow-directory" placeholder="WoW directory...">
+      <input type="text" id="search" placeholder="Addon search...">
 
-        <main>
-            <div class="addonContainer">
-                <ul id="addonUL" class="addonList">
+      <main>
+      <div class="addonContainer">
+        <ul id="addonUL" class="addonList">
 
-                </ul>
-            </div>
-        </main>
+        </ul>
+      </div>
+      </main>
     </div>
-</body>
+  </body>
 
 </html>
 
 <script>
-    let store = new Store();
+let windowControl = require("./modules/windowManager.js")
+let curse = require("./modules/getCurse.js")
+let cheerio = require("cheerio")
+let downloadManager = require("./modules/downloadManager.js")
+let Store = require('electron-store');
+let {ipcRenderer} = require("electron");
+let store = new Store();
 
-    const {ipcRenderer} = require("electron");
-    var input = document.getElementById("search");
-    var addonList = document.getElementById("addonUL");
-    var wowPath = document.getElementById("wow-directory");
-    var lockIcon = document.getElementById("lock");
+var input = document.getElementById("search");
+var addonList = document.getElementById("addonUL");
+var wowPath = document.getElementById("wow-directory");
+var lockIcon = document.getElementById("lock");
 
-    if (store.get("wowPathLocked")) {
-        lockIcon.src = "./assets/padlock-unlock.svg"
-        wowPath.value = store.get("wowPath");
-        wowPath.readOnly = true;
+if (store.get("wowPathLocked")) {
+  lockIcon.src = "./assets/padlock-unlock.svg"
+    wowPath.value = store.get("wowPath");
+  wowPath.readOnly = true;
+}
+
+wowPath.addEventListener("keyup", (event) => {
+  if (event.keyCode === 13 && wowPath.readOnly == false) {
+    lockPath();
+  }
+})
+
+input.addEventListener("keyup", (event) => {
+  results = []
+
+    if (event.keyCode === 13) {
+      while(addonList.firstChild){
+        addonList.removeChild(addonList.firstChild);
+      }
+
+      // results = curse.search(input.value);
+
+      curse.search(input.value, displayResults)
     }
+})
 
-    wowPath.addEventListener("keyup", (event) => {
-        if (event.keyCode === 13 && wowPath.readOnly == false) {
-            lockPath();
-        }
-    })
+function displayResults(results) {
+  console.log("It workings :D");
+  results.forEach(result => {
+    // Creates a button to download the selected item
+    var downloadButton = document.createElement("button");
+    downloadButton.innerHTML = "Download"
+      downloadButton.addEventListener("click", function() {
+        // D:\Program Files (x86)\World of Warcraft\Interface\AddOns
+        addonFolderPath = `${wowPath.value}\\Interface\\AddOns`
+          let Data = {
+            url: result.dlink,
+            savePath: addonFolderPath
+          }
 
-    input.addEventListener("keyup", (event) => {
-        results = []
+        ipcRenderer.send("download-action", Data);
+      });
 
-        if (event.keyCode === 13) {
-            while(addonList.firstChild){
-                addonList.removeChild(addonList.firstChild);
-            }
+    // Creates the list item
+    var li = document.createElement("li");
 
-            results = curse.search(input.value);
+    // Adds the download button and a title to the list item
+    li.appendChild(document.createTextNode(result.title));
+    li.appendChild(downloadButton);
 
-            setTimeout(() => {
-                results.forEach(result => {
-                    // Creates a button to download the selected item
-                    var downloadButton = document.createElement("button");
-                    downloadButton.innerHTML = "Download" 
-                    downloadButton.addEventListener("click", function() {
-                        // D:\Program Files (x86)\World of Warcraft\Interface\AddOns
-                        addonFolderPath = `${wowPath.value}\\Interface\\AddOns`
-                        let Data = {
-                            url: result.dlink,
-                            savePath: addonFolderPath 
-                        }
+    // Adds the list item to the list of Addons
+    addonList.appendChild(li);
+  });
+}
 
-                        ipcRenderer.send("download-action", Data);
-                    });
+function lockPath() {
+  // Switches the WoW path input field from readonly true/false
+  wowPath = document.getElementById("wow-directory");
+  lockIcon = document.getElementById("lock");
 
-                    // Creates the list item
-                    var li = document.createElement("li");
+  if (wowPath.readOnly) {
+    wowPath.readOnly = false;
+    lockIcon.src = "./assets/padlock-unlock.svg"
+  } else {
+    wowPath.readOnly = true;
+    lockIcon.src = "./assets/padlock.svg"
+      // Saves the path and status in user data
+      store.set("wowPath", wowPath.value);
+    store.set("wowPathLocked", true);
+  }
 
-                    // Adds the download button and a title to the list item
-                    li.appendChild(document.createTextNode(result.title));
-                    li.appendChild(downloadButton);
-
-                    // Adds the list item to the list of Addons
-                    addonList.appendChild(li);
-                });
-            }, 1200);
-        }
-    })
-
-    function lockPath() {
-        // Switches the WoW path input field from readonly true/false
-        wowPath = document.getElementById("wow-directory");
-        lockIcon = document.getElementById("lock");
-
-        if (wowPath.readOnly) {
-            wowPath.readOnly = false;
-            lockIcon.src = "./assets/padlock-unlock.svg"
-        } else {
-            wowPath.readOnly = true;
-            lockIcon.src = "./assets/padlock.svg"
-            // Saves the path and status in user data
-            store.set("wowPath", wowPath.value);
-            store.set("wowPathLocked", true);
-        }
-
-    }
-
+}
 </script>
