@@ -4,120 +4,79 @@ body {
   margin: 0;
   height: 100%;
   background-color: #3a3a3a;
-  font-family: "Source Sans Pro", sans-serif;
-}
+  font-family: "Source Sans Pro", sans-serif; }
 
 .container {
   height: 100%;
   overflow: hidden;
-  display: -ms-grid;
   display: grid;
-  -ms-grid-rows: 34px 42px auto;
-  grid-template-rows: 34px 42px auto;
-}
+  grid-template-rows: 34px 42px auto; }
+  .container header {
+    display: grid;
+    grid-template-columns: 85% auto;
+    padding: 8px;
+    background-color: #3a3a3a; }
+    .container header strong {
+      -webkit-app-region: drag;
+      color: #FFF; }
+      .container header strong span {
+        color: skyblue; }
+    .container header nav {
+      justify-self: right; }
+      .container header nav ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0; }
+        .container header nav ul li {
+          float: left;
+          margin-left: 8px; }
+          .container header nav ul li img {
+            width: 12px;
+            cursor: pointer; }
+          .container header nav ul li img#min {
+            padding: 10px; }
+  .container input {
+    background-color: #DBDBDB;
+    border: 0;
+    padding: 12px;
+    color: gray;
+    font-family: "Source Sans Pro", sans-serif;
+    outline: none; }
+  .container input:focus {
+    outline: none; }
+  .container input:read-only {
+    background-color: #1c1c1c; }
+  .container .addonList {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    overflow: auto; }
+    .container .addonList li:last-child {
+      margin-bottom: 10em; }
+    .container .addonList li {
+      list-style-type: none;
+      padding: 20px;
+      margin: 0;
+      background-color: #3aafa9;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap; }
+      .container .addonList li button {
+        float: right;
+        border: none;
+        display: block;
+        border-radius: 20px;
+        border: 2px solid white;
+        color: white;
+        padding: 10px;
+        background: none;
+        margin: 0;
+        transition: all .5s ease-in-out;
+        cursor: pointer; }
+      .container .addonList li button:hover {
+        background-color: white;
+        color: black; }
+      .container .addonList li button:focus {
+        outline: none; }
 
-.container header {
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-columns: 85% auto;
-  grid-template-columns: 85% auto;
-  padding: 8px;
-  background-color: #3a3a3a;
-}
-
-.container header strong {
-  -webkit-app-region: drag;
-  color: #FFF;
-}
-
-.container header strong span {
-  color: skyblue;
-}
-
-.container header nav {
-  -ms-grid-column-align: right;
-  justify-self: right;
-}
-
-.container header nav ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-
-.container header nav ul li {
-  float: left;
-  margin-left: 8px;
-}
-
-.container header nav ul li img {
-  width: 12px;
-  cursor: pointer;
-}
-
-.container header nav ul li img#min {
-  padding: 10px;
-}
-
-.container input {
-  background-color: #DBDBDB;
-  border: 0;
-  padding: 12px;
-  color: gray;
-  font-family: "Source Sans Pro", sans-serif;
-  outline: none;
-}
-
-.container input:focus {
-  outline: none;
-}
-
-.container input:-moz-read-only {
-  background-color: #1c1c1c;
-}
-
-.container input:read-only {
-  background-color: #1c1c1c;
-}
-
-.container .addonList {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  overflow: auto;
-}
-
-.container .addonList li {
-  list-style-type: none;
-  padding: 20px;
-  margin: 0;
-  background-color: #144587;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-}
-
-.container .addonList li button {
-  float: right;
-  border: none;
-  display: block;
-  border-radius: 20px;
-  border: 2px solid white;
-  color: white;
-  padding: 10px;
-  background: none;
-  margin: 0;
-  -webkit-transition: all .5s ease-in-out;
-  transition: all .5s ease-in-out;
-  cursor: pointer;
-}
-
-.container .addonList li button:hover {
-  background-color: white;
-  color: black;
-}
-
-.container .addonList li button:focus {
-  outline: none;
-}
 /*# sourceMappingURL=index.css.map */

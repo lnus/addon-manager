@@ -3,117 +3,118 @@
 $font-stack: "Source Sans Pro", sans-serif;
 
 body {
-    padding: 0;
-    margin: 0;
+  padding: 0;
+  margin: 0;
 
-    height: 100%;
-    // background-color: #EBEBEB;
-    background-color: #3a3a3a;
-    font-family: $font-stack;
+  height: 100%;
+  background-color: #3a3a3a;
+  font-family: $font-stack;
 }
 
 .container {
-    height: 100%;
-    overflow: hidden;
+  height: 100%;
+  overflow: hidden;
+  display: grid;
+  grid-template-rows: 34px 42px auto;
+
+  header {
     display: grid;
-    grid-template-rows: 34px 42px auto;
+    grid-template-columns: 85% auto;
+    padding: 8px;
+    background-color: #3a3a3a;
 
-    header {
-        display: grid;
-        grid-template-columns: 85% auto;
-        padding: 8px;
-        background-color: #3a3a3a;
+    strong {
+      -webkit-app-region: drag;
+      color: #FFF;
 
-        strong {
-            -webkit-app-region: drag;
-            color: #FFF;
-            
-            span {
-                color: skyblue;
-            }
-        }
-
-        nav {
-            justify-self: right;
-
-            ul {
-                list-style-type: none;
-                margin: 0;
-                padding: 0;
-
-                li {
-                    float: left;
-                    margin-left: 8px;
-
-                    img {
-                        width: 12px;
-                        cursor: pointer;
-                    }
-
-                    img#min {
-                        padding: 10px;
-                    }
-                }
-            }
-        }
+      span {
+        color: skyblue;
+      }
     }
 
-    input {
-        background-color: #DBDBDB;
-        border: 0;
-        padding: 12px;
-        color: gray;
-        font-family: $font-stack;
-        outline: none;
-    }
+    nav {
+      justify-self: right;
 
-    input:focus {
-        outline: none;
-    }
-
-    input:read-only {
-        background-color: #1c1c1c;
-    }
-
-    .addonList {
+      ul {
+        list-style-type: none;
         margin: 0;
         padding: 0;
 
-        height: 100%;
-
-        overflow: auto;
-
         li {
-            list-style-type: none;
-            padding: 20px;
-            margin: 0;
-            background-color: #144587;
-            text-overflow: ellipsis;
-            overflow: hidden;
-            white-space: nowrap;
+          float: left;
+          margin-left: 8px;
 
-            button {
-                float: right;
-                border: none;
-                display: block;
-                border-radius: 20px;
-                border: 2px solid white;
-                color: white;
-                padding: 10px;
-                background: none;
-                margin: 0;
-                transition: all .5s ease-in-out;
-                cursor: pointer;
-            }
+          img {
+            width: 12px;
+            cursor: pointer;
+          }
 
-            button:hover {
-                background-color: white;
-                color: black;
-            }
-
-            button:focus {
-                outline: none;
-            }
+          img#min {
+            padding: 10px;
+          }
         }
+      }
     }
+  }
+
+  input {
+    background-color: #DBDBDB;
+    border: 0;
+    padding: 12px;
+    color: gray;
+    font-family: $font-stack;
+    outline: none;
+  }
+
+  input:focus {
+    outline: none;
+  }
+
+  input:read-only {
+    background-color: #1c1c1c;
+  }
+
+  .addonList {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    overflow: auto;
+
+    li:last-child {
+      margin-bottom: 10em;
+    }
+
+    li {
+      list-style-type: none;
+      padding: 20px;
+      margin: 0;
+      background-color: #3aafa9;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+
+      button {
+        float: right;
+        border: none;
+        display: block;
+        border-radius: 20px;
+        border: 2px solid white;
+        color: white;
+        padding: 10px;
+        background: none;
+        margin: 0;
+        transition: all .5s ease-in-out;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: white;
+        color: black;
+      }
+
+      button:focus {
+        outline: none;
+      }
+    }
+  }
 }
